@@ -26,10 +26,9 @@ const jsonParser = bodyParser.json()
 app.listen(port)
 
 app.get('/', (req, res) => {
-    res.json("start")
     async function run(){
         const users = await User.find({})
-        res.send(users)
+        res.status(200).send(users)
         
     }
     run()
