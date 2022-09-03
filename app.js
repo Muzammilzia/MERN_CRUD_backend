@@ -4,21 +4,29 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const User = require('./user');
 const path = require('path')
+const dotenv = require("dotenv");
 
-mongoose.connect('mongodb+srv://muzzammil:muzzammil2920@cluster0.uz2iouw.mongodb.net/?retryWrites=true&w=majority', 
+dotenv.config();
+
+const DB = process.env.DATABASE
+const port = process.env.PORT || 5000
+
+mongoose.connect(DB,{
+    useNewUrlparser: true,
+    useUnifiedTopology: true
+}).then(
     ()=>{
-        console.log("connected")
-    }, e => console.log(e)
-)
+        console.log("connected") 
+    }
+).catch(e => console.log(e))
 
 const app = express()
 app.use(cors())
 const jsonParser = bodyParser.json()
-app.listen(5000)
+app.listen(port)
 
 app.get('/', (req, res) => {
     async function run(){
-        console.log(await User.find({}))
         const users = await User.find({})
         res.send(users)
         
@@ -27,7 +35,6 @@ app.get('/', (req, res) => {
 })
 
 app.post('/',jsonParser, (req,res) => {
-    console.log(req.body)
     async function run(){
         try{
             const user = await User.create({
@@ -45,7 +52,6 @@ app.post('/',jsonParser, (req,res) => {
 })
 
 app.put('/',jsonParser , (req,res) => {
-    console.log(req.body)
     async function run(){
         try{
             const user = await User.updateOne({
