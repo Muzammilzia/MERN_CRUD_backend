@@ -22,7 +22,7 @@ mongoose.connect(DB,{
 
 const app = express()
 app.use(cors({
-    'origin': '*'
+    origin: '*'
 }))
 const jsonParser = bodyParser.json()
 app.listen(port)
