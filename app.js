@@ -21,10 +21,7 @@ mongoose.connect(DB,{
 ).catch(e => console.log(e))
 
 const app = express()
-app.use(cors({
-    origin: '*',
-    methods: ['GET','POST','DELETE','PUT']
-}))
+app.use(cors())
 const jsonParser = bodyParser.json()
 app.listen(port)
 
