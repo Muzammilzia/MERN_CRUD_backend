@@ -8,11 +8,10 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-console.log(process.env.DATABASE)
 
 const DB = process.env.DATABASE
 const port = process.env.PORT || 5000
-console.log(DB)
+
 mongoose.connect(DB,{
     useNewUrlparser: true,
     useUnifiedTopology: true
